@@ -1,0 +1,23 @@
+name: Build Anime ROM for Pixel 4
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Set up environment
+        run: sudo apt-get update && sudo apt-get install repo ccache python-is-python3 -y
+
+      - name: Clone ROM sources
+        run: |
+          mkdir rom && cd rom
+          repo init -u https://github.com/LineageOS/android.git -b lineage-20.0
+          repo sync -c --no-tags --no-clone-bundle -j8
+
+      - name: Start build (placeholder)
+        run: echo 
