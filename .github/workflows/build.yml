@@ -19,5 +19,15 @@ jobs:
           repo init -u https://github.com/LineageOS/android.git -b lineage-20.0
           repo sync -c --no-tags --no-clone-bundle -j8
 
-      - name: Start build (placeholder)
-        run: echo 
+            - name: Build the ROM
+              run: |
+                cd rom
+                . build/envsetup.sh
+                lunch lineage_flame-userdebug
+                mka bacon
+      - name: Upload ROM
+        uses: actions/upload-artifact@v3
+        with:
+          name: AnimeROM-Pixel4
+          path: rom/out/target/product/flame/lineage-*.zip
+
